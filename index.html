@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>miyomiyo | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@100;300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* 変数設定 */
+        :root {
+            --bg-color: #fdfdfb;
+            --text-main: #4a544e;
+            --accent-green: #dcede5;
+            --strong-green: #9ab3a6;
+            --soft-green: #c0d6cb;
+            --accent-border: #edf2f0;
+            --transition-soft: all 0.6s cubic-bezier(0.21, 0.6, 0.35, 1);
+        }
+
+        /* 基本設定 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'IBM Plex Sans JP', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.8;
+            overflow-x: hidden;
+            letter-spacing: 0.02em;
+        }
+
+        /* 共通レイアウト */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* 装飾 */
+        .deco-shape {
+            position: absolute;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        .shape-circle {
+            border-radius: 50%;
+            background-color: var(--accent-green);
+        }
+
+        .shape-ring {
+            border-radius: 50%;
+            border: 2px solid var(--strong-green);
+        }
+
+        .blob {
+            position: absolute;
+            z-index: 2;
+            filter: blur(80px);
+            opacity: 0.2;
+            border-radius: 50%;
+            animation: move 20s infinite alternate;
+            pointer-events: none;
+        }
+
+        @keyframes move {
+            from { transform: translate(0, 0) scale(1); }
+            to { transform: translate(40px, 60px) scale(1.1); }
+        }
+
+        /* セクション共通 */
+        section {
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        .section-num {
+            font-size: 0.7rem;
+            letter-spacing: 0.3rem;
+            color: var(--strong-green);
+            margin-bottom: 0.5rem;
+            display: block;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 3.5rem;
+            line-height: 1.2;
+            position: relative;
+            z-index: 10;
+            text-align: center;
+        }
+
+        .subtitle {
+            font-size: 10px;
+            font-weight: 700;
+            color: #9ca3af;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+            display: block;
+        }
+
+        /* ナビゲーション */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            z-index: 100;
+            background-color: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #f3f4f6;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: #8fb1a0;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--strong-green);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #7a9e8b;
+        }
+
+        /* ヒーローエリア */
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            padding: 0 2rem;
+        }
+
+        .hero-illustration {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 800px;
+            z-index: 10;
+        }
+
+        .hero-illustration img {
+            width: 100%;
+            height: auto;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 20;
+        }
+
+        .hero-welcome {
+            color: var(--strong-green);
+            font-weight: 700;
+            letter-spacing: 0.4em;
+            margin-bottom: 3.5rem;
+            display: inline-block;
+            font-size: 10px;
+            text-transform: uppercase;
+        }
+
+        .hero-name {
+            font-size: 3rem;
+            font-weight: 400;
+            letter-spacing: 1.2em;
+            margin-right: -1.2em;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-sub {
+            color: #9ca3af;
+            font-weight: 700;
+            letter-spacing: 0.6em;
+            font-size: 10px;
+            text-transform: uppercase;
+        }
+
+        /* ABOUT */
+        .about-card {
+            background-color: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid white;
+            padding: 4rem;
+            border-radius: 4rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            text-align: left;
+        }
+
+        .about-info {
+            flex: 1;
+        }
+
+        .about-photo {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .photo-frame {
+            width: 100%;
+            max-width: 320px;
+            aspect-ratio: 4 / 5;
+            background-color: #f9fbf9;
+            border-radius: 2.5rem;
+            overflow: hidden;
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.08);
+            border: 4px solid white;
+            transform: rotate(2deg);
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-item {
+            margin-bottom: 2rem;
+        }
+
+        .about-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .about-label {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            color: var(--strong-green);
+            letter-spacing: 0.4em;
+            display: block;
+            margin-bottom: 0.2rem;
+            font-weight: 700;
+        }
+
+        .about-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        /* CHARACTERISTIC */
+        .char-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2.5rem;
+        }
+
+        .char-card {
+            background-color: white;
+            padding: 3rem;
+            border-radius: 3rem;
+            border: 2px solid white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition-soft);
+        }
+
+        .char-card:hover {
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+        }
+
+        .icon-box {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            font-size: 1.25rem;
+        }
+
+        .icon-yellow { background-color: #fef9c3; }
+        .icon-emerald { background-color: #d1fae5; }
+
+        .char-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .char-card p {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        /* PARALLAX代替 */
+        .parallax-section {
+            height: 60vh;
+            margin: 8rem 0;
+            background-image: url('img/背景画像３.jpeg');
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+            border-radius: 0.5rem;
+        }
+
+        /* HOBBY (JSなしタブ実装) */
+        .hobby-tabs {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .tab-input {
+            display: none;
+        }
+
+        .hobby-label {
+            cursor: pointer;
+            padding: 2.5rem;
+            text-align: center;
+            background-color: white;
+            border-radius: 2rem;
+            border: 2px solid var(--accent-border);
+            transition: var(--transition-soft);
+            display: block;
+        }
+
+        .hobby-label .tab-num {
+            display: block;
+            font-size: 10px;
+            color: #34d399;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: 0.2em;
+        }
+
+        .hobby-label p {
+            font-size: 0.875rem;
+            font-weight: 700;
+        }
+
+        .hobby-label:hover {
+            transform: translateY(-5px);
+            background-color: var(--accent-green);
+            border-color: var(--accent-green);
+        }
+
+        /* 選択時のスタイル */
+        #tab-music:checked ~ .hobby-tabs .label-music,
+        #tab-art:checked ~ .hobby-tabs .label-art,
+        #tab-knit:checked ~ .hobby-tabs .label-knit,
+        #tab-movie:checked ~ .hobby-tabs .label-movie {
+            background-color: var(--accent-green);
+            border-color: var(--accent-green);
+        }
+
+        /* 詳細エリア */
+        .detail-area {
+            background-color: white;
+            padding: 5rem 2rem;
+            border-radius: 4rem;
+            border: 1px solid white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            min-height: 500px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .detail-content {
+            display: none;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* ラジオボタンの状態に応じてコンテンツを表示 */
+        #tab-none:checked ~ .detail-area #content-placeholder { display: block; }
+        #tab-music:checked ~ .detail-area #content-music { display: block; }
+        #tab-art:checked ~ .detail-area #content-art { display: block; }
+        #tab-knit:checked ~ .detail-area #content-knit { display: block; }
+        #tab-movie:checked ~ .detail-area #content-movie { display: block; }
+
+        .detail-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            padding: 0 1rem;
+        }
+
+        .detail-title-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .detail-title-wrapper span {
+            padding: 0.75rem;
+            border-radius: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .detail-header h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .detail-text {
+            color: #6b7280;
+            max-width: 40rem;
+            margin: 0 auto;
+        }
+
+        /* 写真と矢印のコンテナ */
+        .image-slider-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 3rem auto 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hobby-img-frame {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background-color: #f9fbf9;
+            border-radius: 2rem;
+            overflow: hidden;
+            border: 1px solid var(--accent-border);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+
+        .hobby-img-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 矢印ボタン */
+        .arrow-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3.5rem;
+            height: 3.5rem;
+            background-color: white;
+            border: 1px solid var(--accent-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 30;
+            transition: var(--transition-soft);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            color: var(--strong-green);
+            font-size: 1.2rem;
+            user-select: none;
+        }
+
+        .arrow-btn:hover {
+            background-color: var(--accent-green);
+            border-color: var(--accent-green);
+            color: white;
+        }
+
+        .arrow-prev {
+            left: -1.75rem;
+        }
+
+        .arrow-next {
+            right: -1.75rem;
+        }
+
+        .placeholder-text {
+            color: rgba(5, 150, 105, 0.6);
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+        }
+
+        /* フッター */
+        footer {
+            padding: 6rem 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .footer-copy {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.4em;
+            color: var(--strong-green);
+            font-weight: 700;
+        }
+
+        /* レスポンシブ設定 */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero-name { font-size: 2.2rem; letter-spacing: 0.8em; }
+            .about-card { 
+                flex-direction: column; 
+                padding: 3rem 1.5rem; 
+                text-align: center;
+                gap: 3rem;
+            }
+            .photo-frame {
+                transform: rotate(0deg);
+                max-width: 260px;
+            }
+            .hobby-tabs { grid-template-columns: repeat(2, 1fr); }
+            .detail-area { padding: 3rem 1rem; }
+            .section-title { font-size: 2rem; }
+            .arrow-btn { width: 2.8rem; height: 2.8rem; font-size: 1rem; }
+            .arrow-prev { left: -0.5rem; }
+            .arrow-next { right: -0.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-inner">
+            <div class="logo">My Website</div>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#characteristic">Characteristic</a>
+                <a href="#hobby">Hobby</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Top View -->
+    <header>
+        <div class="blob" style="width: 20rem; height: 20rem; background-color: #f0fdf4; top: 5rem; left: 2.5rem;"></div>
+        <div class="blob" style="width: 24rem; height: 24rem; background-color: #ecfdf5; bottom: 2.5rem; right: 2.5rem; animation-delay: -3s;"></div>
+
+        <div class="hero-illustration">
+            <img src="img/背景画像４.PNG" alt="みよみよの手書きイラスト">
+        </div>
+
+        <div class="hero-content">
+            <span class="hero-welcome">Welcome to My Website!</span>
+            <h1 class="hero-name">みよみよ</h1>
+            <p class="hero-sub">Leaders 18th</p>
+        </div>
+    </header>
+
+    <!-- ABOUT -->
+    <section id="about">
+        <div class="deco-shape shape-circle" style="width: 16rem; height: 16rem; top: -2.5rem; left: -5rem; background-color: #dcede5;"></div>
+        <div class="deco-shape shape-ring" style="width: 8rem; height: 8rem; bottom: 5rem; right: -2.5rem;"></div>
+
+        <div class="container">
+            <span class="section-num">01</span>
+            <h2 class="section-title">About Me<span class="subtitle">Who I am</span></h2>
+            
+            <div class="about-card">
+                <!-- 左側：プロフィール情報 -->
+                <div class="about-info">
+                    <div class="about-item">
+                        <span class="about-label">Menter Name</span>
+                        <h3 class="about-value">みよみよ</h3>
+                    </div>
+                    
+                    <div class="about-item">
+                        <span class="about-label">University</span>
+                        <p class="about-value">東京都立大学<br> システムデザイン学部<br> インダストリアルアート学科</p>
+                    </div>
+
+                    <div class="about-item">
+                        <span class="about-label">Birthday</span>
+                        <p class="about-value">2007年2月3日生まれ</p>
+                    </div>
+
+                    <div class="about-item">
+                        <span class="about-label">Role</span>
+                        <div class="about-value">Leaders 18th</div>
+                    </div>
+                </div>
+
+                <!-- 右側：写真エリア -->
+                <div class="about-photo">
+                    <div class="photo-frame">
+                        <!-- ここに自分の写真のファイル名を指定してください -->
+                        <img src="img/自分１.JPG" alt="みよみよの写真">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CHARACTERISTIC -->
+    <section id="characteristic">
+        <div class="deco-shape shape-circle" style="width: 31rem; height: 31rem; right: -10rem; top: 0; background-color: #ebf3ef;"></div>
+        
+        <div class="container">
+            <span class="section-num">02</span>
+            <h2 class="section-title">Characteristic<span class="subtitle">My Personality</span></h2>
+            
+            <div class="char-grid">
+                <div class="char-card">
+                    <div class="deco-shape shape-circle" style="width: 5rem; height: 5rem; right: -1.25rem; top: -1.25rem; background-color: rgba(254, 249, 195, 0.3);"></div>
+                    <div class="icon-box icon-yellow">📝</div>
+                    <h3>コツコツ計画型</h3>
+                    <p>課題は出たらまずタスク化して、何日に何をやるかのスケジュールを立てて進めることが多いです。また、毎月予算を決めてコツコツ貯金を頑張ってます。ポイ活も続くタイプで、最近はDuolingoを頑張ってます。</p>
+                </div>
+                <div class="char-card">
+                    <div class="deco-shape shape-circle" style="width: 5rem; height: 5rem; right: -1.25rem; top: -1.25rem; background-color: rgba(209, 250, 229, 0.3);"></div>
+                    <div class="icon-box icon-emerald">🌱</div>
+                    <h3>MBTI: INFJ</h3>
+                    <p>提唱者タイプ。高い理想と強い信念を持ち、人々のために静かに世界を良くしようとする「平和主義の理想家」。<br>だそうです。合っているかは皆さんに判断を委ねます。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PARALLAX IMAGE -->
+    <div class="container">
+        <div class="parallax-section"></div>
+    </div>
+
+    <!-- HOBBY -->
+    <section id="hobby">
+        <div class="container">
+            <span class="section-num">03</span>
+            <h2 class="section-title">Hobby & Interests<span class="subtitle">What I love</span></h2>
+            
+            <!-- ラジオボタン -->
+            <input type="radio" name="hobby-tab" id="tab-none" class="tab-input" checked>
+            <input type="radio" name="hobby-tab" id="tab-music" class="tab-input">
+            <input type="radio" name="hobby-tab" id="tab-art" class="tab-input">
+            <input type="radio" name="hobby-tab" id="tab-knit" class="tab-input">
+            <input type="radio" name="hobby-tab" id="tab-movie" class="tab-input">
+
+            <div class="hobby-tabs">
+                <label for="tab-music" class="hobby-label label-music">
+                    <span class="tab-num">01</span>
+                    <p>音楽を聴く</p>
+                </label>
+                <label for="tab-art" class="hobby-label label-art">
+                    <span class="tab-num">02</span>
+                    <p>展示巡り</p>
+                </label>
+                <label for="tab-knit" class="hobby-label label-knit">
+                    <span class="tab-num">03</span>
+                    <p>編み物</p>
+                </label>
+                <label for="tab-movie" class="hobby-label label-movie">
+                    <span class="tab-num">04</span>
+                    <p>アニメ・ドラマ・映画</p>
+                </label>
+            </div>
+
+            <!-- 詳細エリア -->
+            <div class="detail-area">
+                <div class="deco-shape shape-circle" style="width: 8rem; height: 8rem; bottom: -2.5rem; right: -2.5rem;"></div>
+                
+                <div id="content-placeholder" class="detail-content">
+                    <p class="placeholder-text">詳細を選択してください 🌱</p>
+                </div>
+
+                <!-- 01: Music -->
+                <div id="content-music" class="detail-content">
+                    <div class="detail-header">
+                        <div class="detail-title-wrapper">
+                            <span style="background-color: #f0fdf4;">🎧</span>
+                            <h3>音楽を聴く</h3>
+                        </div>
+                        <p class="detail-text">好みのジャンルはJPOPと少しKPOP。フェスに参戦して最高だったので、もっとたくさんのライブに行こうと思っています。ライブに行きたいアーティストが多くて、時間とお金が足りないのが最近の悩みです。</p>
+                    </div>
+                    <div class="image-slider-container">
+                        <label for="tab-movie" class="arrow-btn arrow-prev">←</label>
+                        <div class="hobby-img-frame">
+                            <img src="img/hobby音楽.jpg" alt="フェスの写真">
+                        </div>
+                        <label for="tab-art" class="arrow-btn arrow-next">→</label>
+                    </div>
+                </div>
+
+                <!-- 02: Art -->
+                <div id="content-art" class="detail-content">
+                    <div class="detail-header">
+                        <div class="detail-title-wrapper">
+                            <span style="background-color: #fefce8;">🏛️</span>
+                            <h3>展示巡り</h3>
+                        </div>
+                        <p class="detail-text">インプットを増やすために、積極的に展示に行っています。建築のデザインに興味があるので、有名な建築家が建てた建築も巡っています。</p>
+                    </div>
+                    <div class="image-slider-container">
+                        <label for="tab-music" class="arrow-btn arrow-prev">←</label>
+                        <div class="hobby-img-frame">
+                            <img src="img/hobby展示巡り.png" alt="展示の様子">
+                        </div>
+                        <label for="tab-knit" class="arrow-btn arrow-next">→</label>
+                    </div>
+                </div>
+
+                <!-- 03: Knit -->
+                <div id="content-knit" class="detail-content">
+                    <div class="detail-header">
+                        <div class="detail-title-wrapper">
+                            <span style="background-color: #f0fdf4;">🧶</span>
+                            <h3>編み物</h3>
+                        </div>
+                        <p class="detail-text">一年生の頃に友達の影響で始めた編み物。ニット帽、巾着、ハンドウォーマーなどを作りました。誰かにプレゼント用で作ることが多いので、自分用があまり手元に無いのが寂しいですが、喜んでもらえたのでよかったです♪</p>
+                    </div>
+                    <div class="image-slider-container">
+                        <label for="tab-art" class="arrow-btn arrow-prev">←</label>
+                        <div class="hobby-img-frame" style="display: flex; align-items: center; justify-content: center; background-color: #f9fafb;">
+                            <p style="color: #9ca3af; font-size: 12px;">
+                                <img src="img/hobby編み物.png" alt="編み物の写真">
+                            </p>
+                        </div>
+                        <label for="tab-movie" class="arrow-btn arrow-next">→</label>
+                    </div>
+                </div>
+
+                <!-- 04: Movie -->
+                <div id="content-movie" class="detail-content">
+                    <div class="detail-header">
+                        <div class="detail-title-wrapper">
+                            <span style="background-color: #f5f3ff;">🍿</span>
+                            <h3>アニメ・ドラマ・映画鑑賞</h3>
+                        </div>
+                        <p class="detail-text">おすすめのアニメ、ドラマ・映画があればぜひ教えてください！</p>
+                    </div>
+                    <div class="image-slider-container">
+                        <label for="tab-knit" class="arrow-btn arrow-prev">←</label>
+                        <div class="hobby-img-frame">
+                            <img src="img/hobby鑑賞.jpeg" alt="図書館">
+                        </div>
+                        <label for="tab-music" class="arrow-btn arrow-next">→</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="deco-shape shape-circle" style="width: 5rem; height: 5rem; top: 0; left: 50%; transform: translateX(-50%);"></div>
+        <p class="footer-copy">© Life is Tech! WebDesign Course みよみよ</p>
+    </footer>
+
+</body>
+</html>
